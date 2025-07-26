@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KYC Secure Upload</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center text-indigo-600 mb-6">Upload KYC File</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="mb-4">
+          {% for category, message in messages %}
+            <div class="p-3 rounded text-white {{ 'bg-green-600' if category == 'success' else 'bg-red-600' }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    <form action="/upload" method="post" enctype="multipart/form-data" class="space-y-4">
+  <div>
+    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+    <input type="text" name="name" id="nama" required
+           class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+  </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Choose file (video, audio, or image)</label>
+        <input type="file" name="file" required
+               class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4
+                      file:rounded file:border-0 file:text-sm file:font-semibold
+                      file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+      </div>
+      
+      <button type="submit"
+              class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition">Upload</button>
+    </form>
+  </div>
+</body>
+</html>

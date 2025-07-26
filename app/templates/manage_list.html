@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar File KYC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto px-4 py-10">
+        <div class="mb-6">
+            <h1 class="text-3xl font-bold text-center text-indigo-600">Know Your Customer System</h1>
+            <p class="text-center text-gray-500">Customer Service Dashboard</p>
+        </div>
+
+        <div class="overflow-x-auto shadow rounded-lg bg-white">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-indigo-600 text-white">
+                    <tr>
+                        <th class="px-4 py-3 text-left text-sm font-medium">ID</th>
+                        <th class="px-4 py-3 text-left text-sm font-medium">Customer</th>
+                        <th class="px-4 py-3 text-left text-sm font-medium">Filename</th>
+                        <th class="px-4 py-3 text-left text-sm font-medium">Uploaded</th>
+                        <th class="px-4 py-3 text-left text-sm font-medium">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    {% for file in files %}
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-4 py-2 text-sm">{{ file.id }}</td>
+                        <td class="px-4 py-2 text-sm">{{ file.name }}</td>
+                        <td class="px-4 py-2 text-sm">{{ file.filename }}</td>
+                        <td class="px-4 py-2 text-sm">{{ file.uploaded_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td class="px-4 py-2">
+                            <a href="/manage/secure_open?file_id={{ file.id }}"
+                               class="inline-block px-3 py-1 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded shadow">
+                                Open
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="text-center text-sm text-gray-500 px-4 py-4">
+                            Files not found
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
